@@ -20,8 +20,8 @@ return new class extends Migration
         $table->unsignedBigInteger('match_id');
         $table->timestamps();
 
-        $table->foreign('usuario_id')->references('id')->on('create_users_table');
-        $table->foreign('match_id')->references('id')->on('match');
+        $table->foreign('user_id')->references('id')->on('create_users_table');
+        $table->foreign('match_id')->references('id')->on('diceMatch');
         
 
 
