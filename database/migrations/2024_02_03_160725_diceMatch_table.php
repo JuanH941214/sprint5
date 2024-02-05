@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('diceMatch', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nickname');
             $table->integer('winRate')->nullable();
+            //$table->string('matches played');
             $table->timestamps();
             });
     }
