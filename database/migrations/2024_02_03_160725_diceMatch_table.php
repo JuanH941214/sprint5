@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('diceMatch', function (Blueprint $table) {
             $table->id();
-            $table->integer('result');
+            $table->string('name');
+            $table->integer('winRate')->nullable();
             $table->timestamps();
             });
     }
@@ -23,6 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('diceMatch');
+
     }
 };

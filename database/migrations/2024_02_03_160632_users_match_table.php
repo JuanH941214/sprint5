@@ -11,20 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('player_match', function (Blueprint $table) {
         $table->id();
         $table->integer('diceOne');
         $table->integer('diceTwo');
         $table->integer('sum');
-        $table->unsignedBigInteger('user_id');
-        $table->unsignedBigInteger('match_id');
+        $table->unsignedBigInteger('user_id')->references('id')->on('users');
+        $table->unsignedBigInteger('match_id')->references('id')->on('diceMatch');
         $table->timestamps();
-
-        $table->foreign('user_id')->references('id')->on('create_users_table');
-        $table->foreign('match_id')->references('id')->on('diceMatch');
         
-
-
         });
     }
 
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('user_match');
     }
 };
