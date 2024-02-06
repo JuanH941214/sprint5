@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ApiDiceMatchController;
+use App\Http\Controllers\Api\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
+use Spatie\FlareClient\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     
 });
 Route::apiResource('diceMatch', ApiDiceMatchController::class);
+Route::post('/login', [LoginController::class, 'login']);
+
