@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('player_match', function (Blueprint $table) {
+        Schema::create('play', function (Blueprint $table) {
         $table->id();
         $table->integer('diceOne');
         $table->integer('diceTwo');

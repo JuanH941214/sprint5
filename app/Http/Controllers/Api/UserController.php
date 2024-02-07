@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
+        //
   
     }
 
@@ -31,15 +32,15 @@ class UserController extends Controller
      */
     public function store(request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
             'password' => 'required|string|min:8'
         ]);
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => hash::make($request->password),
+            'name' => $validated['name'],//request->name otra opcion 
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
         return response()->json([
@@ -47,6 +48,7 @@ class UserController extends Controller
            'message' => 'user created succesfully!',
            'user' => $user, 
         ],201); 
+        Auth::login($user);
     }
    /* public function store(Request $request)
     {

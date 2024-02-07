@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDiceMatch;
 use App\Models\diceMatch;
+use App\Models\MatchResults;
 use Illuminate\Http\Request;
 
 
-class ApiDiceMatchController extends Controller
+class matchResultsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $diceMatches = DiceMatch::all();
+        $diceMatches = MatchResults::all();
         return response()->json([
             'status' => true,
             'diceMatches' => $diceMatches,
@@ -32,10 +33,10 @@ class ApiDiceMatchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDiceMatch $request)
+    public function store(request $request)
     {
         //dd($request->all());
-        $diceMatch = DiceMatch::create($request->all());
+        $diceMatch = MatchResults::create($request->all());
 
         return response()->json([
             'status' => true,
@@ -51,7 +52,7 @@ class ApiDiceMatchController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(diceMatch $diceMatch)
+    public function show(request $diceMatch)
     {
         //
     }
@@ -59,7 +60,7 @@ class ApiDiceMatchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(diceMatch $diceMatch)
+    public function edit(request $diceMatch)
     {
         //
     }
@@ -67,7 +68,7 @@ class ApiDiceMatchController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, diceMatch $diceMatch)
+    public function update(Request $request)
     {
         //
     }
@@ -75,7 +76,7 @@ class ApiDiceMatchController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(diceMatch $diceMatch)
+    public function destroy(request $diceMatch)
     {
         //
     }
