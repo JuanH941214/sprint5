@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Play extends Model
 {
     use HasFactory;
-    protected $table = 'player_match';
+    protected $table = 'play';
     protected $fillable = [
         'diceOne',
         'diceTwo',

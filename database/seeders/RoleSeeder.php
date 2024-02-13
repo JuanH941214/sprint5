@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
         $rolAdmin=Role::create(['name'=>'admin']);
         $rolPlayer=Role::create(['name'=>'player']);
 
-        Permission:create(['name' => 'admin.winRate'])->assignRole($rolAdmin);
+        //Permission:create(['name' => 'admin.winRate'])->assignRole($rolAdmin);
 
     }
 }

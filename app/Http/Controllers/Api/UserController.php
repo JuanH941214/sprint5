@@ -42,13 +42,14 @@ class UserController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
-
+        Auth::login($user);
+        
         return response()->json([
            'status' => true,
            'message' => 'user created succesfully!',
            'user' => $user, 
         ],201); 
-        Auth::login($user);
+       
     }
    /* public function store(Request $request)
     {
@@ -58,9 +59,20 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(request $request)
     {
-        //
+        $user=auth()->user();
+        if($user){
+            $users= User::all();
+        return response()->json([
+            'status' => true,
+            'users' => $users,
+        ],200);
+
+        }
+        else{
+            return response()->json(['error'=>'no autorizado'],401);
+        }
     }
 
     /**

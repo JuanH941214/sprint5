@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDiceMatch;
-use App\Models\diceMatch;
 use App\Models\MatchResults;
 use Illuminate\Http\Request;
 

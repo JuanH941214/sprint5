@@ -9,6 +9,6 @@ class MatchResults extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'winRate'];
-    protected $table = 'diceMatch';
+    protected $table = 'matchResults';
 
 }

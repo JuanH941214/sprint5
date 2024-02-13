@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => env('SESSION_DRIVER', 'array'),//paso de file a array porq passport no necesita de sesiones para autenticar.
 
     /*
     |--------------------------------------------------------------------------
