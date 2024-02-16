@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'web',//debe ir web o hay error al autenticar el token
         'passwords' => 'users',
     ],
 

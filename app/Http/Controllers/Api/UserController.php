@@ -61,17 +61,15 @@ class UserController extends Controller
      */
     public function show(request $request)
     {
-        $user=auth()->user();
-        if($user){
-            $users= User::all();
-        return response()->json([
-            'status' => true,
-            'users' => $users,
-        ],200);
-
-        }
-        else{
-            return response()->json(['error'=>'no autorizado'],401);
+        $user = auth()->user();
+        if ($user) {
+            $players = User::role('player')->get();
+            return response()->json([
+                'status' => true,
+                'users' => $players,
+            ], 200);
+        } else {
+            return response()->json(['error' => 'no autorizado'], 401);
         }
     }
 

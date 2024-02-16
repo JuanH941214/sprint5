@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\Bridge\AccessToken;
 
+
 class LoginController extends Controller
 {
     public function login(Request $request)

@@ -29,6 +29,11 @@ Route::get('/user', function () {
 })->middleware('auth:api');
 
 Route::middleware('auth:api')->group(function(){
-    Route::get('/showPlayers',[UserController::class, 'show']);
     Route::post('/logout',[LoginController::class, 'logout']);
+    Route::group(['middleware' => ['role:admin']], function(){
+        Route::get('/showPlayers',[UserController::class, 'show']);
+    });
 });
+
+
+    
