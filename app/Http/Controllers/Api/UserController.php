@@ -15,7 +15,18 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        //
+
+        $user = auth()->user();
+        if ($user) {
+            $players = User::role('player')->get();
+            return response()->json([
+                'status' => true,
+                'users' => $players,
+            ], 200);
+        } else {
+            return response()->json(['error' => 'no autorizado'], 401);
+        }
+    
   
     }
 
@@ -73,20 +84,37 @@ class UserController extends Controller
         }
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function ranking(array $players)
     {
-        //
+        foreach($players as $player){
+            
+
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(Request $request,string $id)
     {
-        //
+        $user = auth()->user();
+        if(!$user){
+            return response()->json(['error' => 'no autorizado'], 401);
+        }
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+          $userToUpdate = User::find($id);
+          $userToUpdate->update([
+            'name'=> $request->input('name'),
+        ]);
+          return response()->json(['message' => 'user updated'],200);
+        
     }
 
     /**

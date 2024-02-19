@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\matchResultsController;
+use App\Http\Controllers\PlayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\Api;
@@ -22,7 +23,6 @@ use Spatie\FlareClient\Api;
  //   return $request->user();
     
 //});
-Route::apiResource('diceMatch', matchResultsController::class);
 Route::post('login', [LoginController::class, 'login']);
 Route::get('/user', function () {
     // ...
@@ -31,7 +31,13 @@ Route::get('/user', function () {
 Route::middleware('auth:api')->group(function(){
     Route::post('/logout',[LoginController::class, 'logout']);
     Route::group(['middleware' => ['role:admin']], function(){
-        Route::get('/showPlayers',[UserController::class, 'show']);
+        Route::get('/showPlayers',[UserController::class, 'index']);
+        Route::get('/showPlayer',[UserController::class, 'index']);
+
+    });
+    Route::group(['middleware' => ['role:player']], function(){
+        Route::post('/players/{id}',[PlayController::class, 'show']);
+        Route::post('/players/{id}/games',[PlayController::class, 'play']);
     });
 });
 

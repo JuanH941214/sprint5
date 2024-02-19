@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('play', function (Blueprint $table) {
         $table->id();
+        $table->unsignedBigInteger('user_id')->references('id')->on('users');
         $table->integer('diceOne');
         $table->integer('diceTwo');
-        $table->integer('sum');
-        $table->unsignedBigInteger('user_id')->references('id')->on('users');
-        $table->unsignedBigInteger('match_id')->references('id')->on('diceMatch');
+        $table->integer('result');
         $table->timestamps();
         
         });

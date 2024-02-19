@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-       //
-    }
+        Schema::table('play', function (Blueprint $table) {
+            $table->dropColumn('match_id');
+            // Otros cambios que desees realizar...
+        });    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_match');
+        //
     }
 };

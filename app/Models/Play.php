@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Play extends Model
 {
@@ -14,6 +15,13 @@ class Play extends Model
         'diceTwo',
         'sum',
         'user_id',
-        'match_id',
+        
     ];
+
+    public function player(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }
