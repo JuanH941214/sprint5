@@ -7,9 +7,8 @@ use App\Models\Play;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Contracts\Role;
+
+
 
 class PlayController extends Controller
 {
@@ -33,7 +32,7 @@ class PlayController extends Controller
     public function play(Request $request)
     {
         $user = auth()->user();
-        if ($user->hasRole('player')) {
+        if ($user->can('player.play')) {
             $diceOne = rand(1, 7);
             $diceTwo = rand(1, 7);
             $sum = ($diceOne + $diceTwo);
@@ -91,7 +90,18 @@ class PlayController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = auth()->user();
+        if(!$user){
+            return response()->json(['error' => 'no autorizado'], 401);
+        }
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+          $userToUpdate = User::find($id);
+          $userToUpdate->update([
+            'nickname'=> $request->input('nickname'),
+        ]);
+          return response()->json(['message' => 'user updated'],200);
     }
 
     /**

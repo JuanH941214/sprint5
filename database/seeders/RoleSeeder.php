@@ -39,6 +39,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'player.seeResults'])->assignRole($rolPlayer);
         Permission::create(['name' => 'player.deleteResults'])->assignRole($rolPlayer);
         Permission::create(['name' => 'player.seeWinRate'])->assignRole($rolPlayer);
+        Permission::create(['name' => 'player.updateProfile'])->assignRole($rolPlayer);//nuevo
+
 
 
 

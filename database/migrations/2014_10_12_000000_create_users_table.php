@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nickname');
+            $table->string('nick_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->integer('partidas_ganadas')->default(0);
-            $table->integer('total_partidas')->default(0);
+            $table->integer('win_rate')->default(0);
+            //$table->integer('total_matches')->default(0);
             $table->foreignId('play_id')->references('id')->on('play');
 
         });

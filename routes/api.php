@@ -31,13 +31,18 @@ Route::get('/user', function () {
 Route::middleware('auth:api')->group(function(){
     Route::post('/logout',[LoginController::class, 'logout']);
     Route::group(['middleware' => ['role:admin']], function(){
-        Route::get('/showPlayers',[UserController::class, 'index']);
-        Route::get('/showPlayer',[UserController::class, 'index']);
+        Route::get('/players',[UserController::class, 'index']);
+        Route::get('/players/ranking',[UserController::class, 'showRanking']);
+        Route::get('/players/ranking/loser',[UserController::class, 'lowestWinRate']);
+        Route::get('/players/ranking/winner',[UserController::class, 'highestWinRate']);
+
 
     });
     Route::group(['middleware' => ['role:player']], function(){
         Route::post('/players/{id}',[PlayController::class, 'show']);
         Route::post('/players/{id}/games',[PlayController::class, 'play']);
+        Route::delete('/players/{id}/games',[PlayController::class, 'destroy']);
+        Route::put('/players/{id}',[PlayController::class, 'update']);
     });
 });
 
