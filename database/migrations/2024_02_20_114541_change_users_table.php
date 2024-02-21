@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('play', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('user_id')->references('id')->on('users');
-        $table->integer('diceOne');
-        $table->integer('diceTwo');
-        $table->integer('result');
-        $table->timestamps();
-        
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('play_id');
+
         });
     }
 
@@ -27,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('play');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('win_rate');
+            $table->dropColumn('play_id');
+        });
     }
 };

@@ -84,7 +84,6 @@ class UserController extends Controller
         if(!$user){
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
-        //$oldWinRate= $user->win_rate;
         $totalPlays=$this->totalGamesPerPlayer($id);
         $gamesWon=$this->gamesWonPerPLayer($id);
         $newWinRate=($totalPlays > 0) ? ($gamesWon * 100) / $totalPlays : 0;//? como condicion // : como resultado si es falso

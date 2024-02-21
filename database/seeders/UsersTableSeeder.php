@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Play;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,25 +15,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'nickname' => 'Juan Hernandez',
-            'email' => 'juanHernandez@gmail.com',
-            'password'=> Hash::make('password')
-        ]);
-        User::create([
-            'nickname' => 'Joan clement',
-            'email' => 'joancl@gmail.com',
-            'password'=> Hash::make('password')
-        ])->assignRole('admin');
-        User::create([
-            'nickname' => 'Andrea lucia',
-            'email' => 'andLul@gmail.com',
-            'password'=> Hash::make('password')
-        ])->assignRole('player');
-        User::create([
-            'nickname' => 'Nicolas Casto',
-            'email' => 'Nical@gmail.com',
-            'password'=> Hash::make('password')
-        ])->assignRole('player');
+        User::factory(10)->create()->each(function ($user) {
+            Play::factory(['user_id' => $user->id])->count(rand(1, 5))->create();
+        });
+  
     }
 }

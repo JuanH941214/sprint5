@@ -18,10 +18,10 @@ class Play extends Model
         
     ];
 
-    public function player(): BelongsTo
+    /*public function player(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
+*/
 
 }
