@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Play;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,11 +36,11 @@ class PlayController extends Controller
         if ($user->can('player.play')) {
             $diceOne = rand(1, 7);
             $diceTwo = rand(1, 7);
-            $sum = ($diceOne + $diceTwo);
+            $result = ($diceOne + $diceTwo);
             $requestData = [
                 'diceOne' => $diceOne,
                 'diceTwo' => $diceTwo,
-                'sum' => $sum,
+                'result' => $result,
                 'user_id' => $user->id,
             ];
             $this->store($requestData);
@@ -56,14 +57,15 @@ class PlayController extends Controller
         $validate = Validator::make($data,[
             'diceOne' => 'required|integer',
             'diceTwo' => 'required|integer',
-            'sum' => 'required|integer',
+            'result' => 'required|integer',
             'user_id' => 'required',
         ]);
+         $data=$validate->validated();
         $play = Play::create([
-            'diceOne' => $validate['diceOne'],
-            'diceTwo' => $validate['diceTwo'],
-            'sum' => $validate['sum'],
-            'user_id' => $validate['user_id'],
+            'diceOne' => $data['diceOne'],
+            'diceTwo' => $data['diceTwo'],
+            'result' => $data['result'],
+            'user_id' => $data['user_id'],
 
         ]);
     }
@@ -95,12 +97,14 @@ class PlayController extends Controller
             return response()->json(['error' => 'no autorizado'], 401);
         }
         $request->validate([
-            'name' => 'required|string',
+            'nick_name' => 'required|string',
         ]);
-          $userToUpdate = User::find($id);
-          $userToUpdate->update([
-            'nickname'=> $request->input('nickname'),
-        ]);
+        try{
+        $userToUpdate = User::find($id);
+        }catch (ModelNotFoundException $e){
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }         
+          $userToUpdate->update($request->only('nick_name'));
           return response()->json(['message' => 'user updated'],200);
     }
 
