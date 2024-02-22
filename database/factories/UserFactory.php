@@ -28,11 +28,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'nickname' => fake()->name(),
+            'nick_name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(60),
             'win_rate' =>fake()->numberBetween(0,100),
         ];
     }

@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\matchResultsController;
-use App\Http\Controllers\PlayController;
+use App\Http\Controllers\Api\PlayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\FlareClient\Api;
@@ -39,7 +38,7 @@ Route::middleware('auth:api')->group(function(){
 
     });
     Route::group(['middleware' => ['role:player']], function(){
-        Route::post('/players/{id}',[PlayController::class, 'show']);
+        //Route::post('/players/{id}',[PlayController::class, 'show']);
         Route::post('/players/{id}/games',[PlayController::class, 'play']);
         Route::delete('/players/{id}/games',[PlayController::class, 'destroy']);
         Route::put('/players/{id}',[PlayController::class, 'update']);

@@ -20,8 +20,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('win_rate')->default(0);
-            $table->foreignId('play_id')->references('id')->on('play');
-
         });
     }
 

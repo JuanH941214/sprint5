@@ -79,7 +79,7 @@ class UserController extends Controller
         }
     }
 
-    public function CalculateWinRate($id){
+    public function calculateWinRate($id){
         $user = User::find($id);
         if(!$user){
             return response()->json(['error' => 'Usuario no encontrado'], 404);
@@ -100,19 +100,19 @@ class UserController extends Controller
             return $totalPlays;
         }
         else {
-            return response()->json(['error' => 'Usuario no encontrado'], 404);
+            return 0;
         }   
     }
 
     public function gamesWonPerPLayer($id)
     {
         $user= User::find($id);
-        $totalPlays= Play::where('user_id',$user->id)->where('sum',7)->count();
+        $totalPlays= Play::where('user_id',$user->id)->where('result',7)->count();
         if($totalPlays){
             return $totalPlays;
         }
         else {
-            return response()->json(['error' => 'Usuario no encontrado'], 404);
+            return 0;
         }   
     }
 
@@ -145,7 +145,7 @@ class UserController extends Controller
     {
         $ranking = DB::table('users')
         ->select('users.id', 'users.win_rate','users.nick_name')
-        ->join('model_has_roles','users.id'.'=','model_has_roles.model_id')
+        ->join('model_has_roles','users.id','=','model_has_roles.model_id')
         ->join('roles','model_has_roles.role_id','=', 'roles.id')
         ->where('roles.name','=','player')
         ->orderByDesc('users.win_rate')
@@ -160,7 +160,7 @@ class UserController extends Controller
         if ($user) {
             $ranking = DB::table('users')
             ->select('users.id', 'users.win_rate', 'users.nick_name')
-            ->join('model_has_roles', 'users.id' . '=', 'model_has_roles.model_id')
+            ->join('model_has_roles', 'users.id' , '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->where('roles.name', '=', 'player')
             ->orderBy('users.win_rate')
@@ -175,7 +175,7 @@ class UserController extends Controller
         if ($user) {
             $ranking = DB::table('users')
             ->select('users.id', 'users.win_rate', 'users.nick_name')
-            ->join('model_has_roles', 'users.id' . '=', 'model_has_roles.model_id')
+            ->join('model_has_roles', 'users.id' , '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->where('roles.name', '=', 'player')
             ->orderByDesc('users.win_rate')

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -27,9 +29,10 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $rolAdmin=Role::create(['name'=>'admin', 'guard_name' => 'api']);
-        $rolPlayer=Role::create(['name'=>'player', 'guard_name' => 'api']);
+       $rolPlayer=Role::create(['name'=>'player']);
+       $rolAdmin=Role::create(['name'=>'admin']);
 
+    
         Permission::create(['name' => 'admin.seeAllPlayers'])->assignRole($rolAdmin);
         Permission::create(['name' => 'admin.PlayerWinRate'])->assignRole($rolAdmin);
         Permission::create(['name' => 'admin.allWinRates'])->assignRole($rolAdmin);

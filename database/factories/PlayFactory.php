@@ -20,11 +20,14 @@ class PlayFactory extends Factory
     {
         $diceOne = fake()->numberBetween(1, 6);
         $diceTwo = fake()->numberBetween(1, 6);
+        $userId = User::inRandomOrder()->first()->id;
+
         return [
             'diceOne' => $diceOne,
             'diceTwo' => $diceTwo,
-            'sum' =>  $diceOne + $diceTwo,
-            'user_id' => User::factory(),
+            'result' =>  $diceOne + $diceTwo,
+            //'user_id' => User::factory(), duplica usarios ?
+            'user_id' => $userId,
         ];
     }
 }

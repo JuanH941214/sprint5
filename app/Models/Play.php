@@ -13,7 +13,7 @@ class Play extends Model
     protected $fillable = [
         'diceOne',
         'diceTwo',
-        'sum',
+        'result',
         'user_id',
         
     ];
