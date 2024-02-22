@@ -38,7 +38,7 @@ Route::middleware('auth:api')->group(function(){
 
     });
     Route::group(['middleware' => ['role:player']], function(){
-        //Route::post('/players/{id}',[PlayController::class, 'show']);
+        Route::get('/players/{id}',[PlayController::class, 'show']);
         Route::post('/players/{id}/games',[PlayController::class, 'play']);
         Route::delete('/players/{id}/games',[PlayController::class, 'destroy']);
         Route::put('/players/{id}',[PlayController::class, 'update']);
