@@ -13,16 +13,18 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $login = $request->validate([
-            'email' => 'required|string',
+        $login=$request->validate([
+            'email'=>'required',
             'password' => 'required|string'
         ]);
+
         if (!Auth::attempt($login)) {
             return response(['message' => 'invalid login credentials'],401);
         } 
         $user = $request->user();//devolverá el modelo del usuario haciendo la solicitud al request,     
         $token = $user->createToken('authToken')->accessToken;
-        return response()->json(['token' => $token]);
+        return response()->json(['token' => $token],200);
+        
     }   
 
      
@@ -30,10 +32,6 @@ class LoginController extends Controller
         $token = $request->user()->token();
         $token->revoke();
         return response()->json(['message' => 'Successfully logged out']);
-        /*Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/');*/// esta respuesta es para un logout "webased" con passpor es distinto 
     }
 
 

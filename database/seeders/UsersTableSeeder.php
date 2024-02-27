@@ -39,7 +39,13 @@ class UsersTableSeeder extends Seeder
             'email' => 'joancl@gmail.com',
             'password'=> Hash::make('password'),            
         ])->assignRole('admin');
-    }
+    
+    User::create([
+        'nick_name' => 'Test Player',
+        'email' => 'gkuphal@example.com',
+        'password'=> Hash::make('password'),            
+    ])->assignRole('player');
+}
 
     
 }

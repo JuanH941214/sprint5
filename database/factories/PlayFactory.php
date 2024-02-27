@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Play;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Workbench\Database\Factories\UserFactory;
 
@@ -16,6 +17,7 @@ class PlayFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Play::class;
     public function definition(): array
     {
         $diceOne = fake()->numberBetween(1, 6);

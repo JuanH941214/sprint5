@@ -34,8 +34,8 @@ class PlayController extends Controller
     {
         $user = auth()->user();
         if ($user->can('player.play')) {
-            $diceOne = rand(1, 7);
-            $diceTwo = rand(1, 7);
+            $diceOne = rand(1, 6);
+            $diceTwo = rand(1, 6);
             $result = ($diceOne + $diceTwo);
             $requestData = [
                 'diceOne' => $diceOne,
@@ -44,6 +44,7 @@ class PlayController extends Controller
                 'user_id' => $user->id,
             ];
             $this->store($requestData);
+            return response(($requestData),200);
         } else {
             return response()->json(['error' => 'no tienes permiso para jugar'], 403);
         }
@@ -68,6 +69,11 @@ class PlayController extends Controller
             'user_id' => $data['user_id'],
 
         ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'play created succesfully!',
+            'play' => $play, 
+         ],201);
     }
 
     /**
@@ -83,7 +89,7 @@ class PlayController extends Controller
                 'plays' => $plays,
             ], 200);
         } else {
-            return response()->json(['error' => 'no autorizado'], 401);
+            return response()->json(['error' => 'no autorizado'], 403);
         }
     }
 

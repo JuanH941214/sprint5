@@ -18,7 +18,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
         $user = auth()->user();
         if ($user) {
             $players = User::role('player')->get();
@@ -41,24 +40,37 @@ class UserController extends Controller
     public function store(request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string',
+            'nick_name' => 'nullable|string',
+            'email' => 'required|string|unique:users,email',
             'password' => 'required|string|min:8'
         ]);
+        if(!$request->filled('nick_name')){
+            $validated['nick_name']='Anonymous';
+        }
         $user = User::create([
-            'name' => $validated['name'],//request->name otra opcion 
+            'nick_name' => $validated['nick_name'],//request->name otra opcion 
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
-        Auth::login($user);
-        
-        return response()->json([
-           'status' => true,
-           'message' => 'user created succesfully!',
-           'user' => $user, 
-        ],201); 
+
+        if ($user) {
+            Auth::login($user);
+            $user->assignRole('player'); 
+            return response()->json([
+                'status' => true,
+                'message' => 'user created succesfully!',
+                //'user' => $user,
+            ], 201);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to create user.',
+            ], 500);
+        }
        
     }
+
+   
 
     /**
      * Display the specified resource.//ranking 
@@ -125,11 +137,11 @@ class UserController extends Controller
 
         elseif($user->hasRole('player')){
             $request->validate([
-                'name' => 'required|string',
+                'nick_name' => 'required|string',
             ]);
               $userToUpdate = User::find($id);
               $userToUpdate->update([
-                'name'=> $request->input('name'),
+                'nick_name'=> $request->input('name'),
             ]);
               return response()->json(['message' => 'user updated'],200);
         }    

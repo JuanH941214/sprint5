@@ -23,9 +23,9 @@ use Spatie\FlareClient\Api;
     
 //});
 Route::post('login', [LoginController::class, 'login']);
-Route::get('/user', function () {
-    // ...
-})->middleware('auth:api');
+Route::post('/register', [LoginController::class, 'store']);
+
+
 
 Route::middleware('auth:api')->group(function(){
     Route::post('/logout',[LoginController::class, 'logout']);
