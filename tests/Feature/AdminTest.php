@@ -52,7 +52,7 @@ class AdminTest extends TestCase
             "status" => true
         ]);
     }
-    /*
+    
     public function testCanCalculatePlaysWonPerPlayer(): void
     { 
     $user=User::factory()->create();
@@ -61,7 +61,7 @@ class AdminTest extends TestCase
      $result = $this->gamesWonPerPlayer($user->id);
      $this->assertEquals(5, $result);
 
-    }*/
+    }
 
     public function gamesWonPerPLayer($id)
     {

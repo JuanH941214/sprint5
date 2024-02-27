@@ -41,28 +41,6 @@ class UserTest extends TestCase
         //$response->dd();
         $response->assertOk();
     }
-/*
-    public function testCanCreateUser()
-    {
-        $userData = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => 'password123', // 
-        ];
-
-        $response = $this->json('POST', '/api/users', $userData);
-
-        $response->assertStatus(201)
-                 ->assertJson([
-                    'status' => true,
-                    'message' => 'user created successfully!',
-                 ]);
-
-        $this->assertDatabaseHas('users', [
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-        ]);
-    }*/
 
 
     public function testUserCreationWithAnonymousNickname()
