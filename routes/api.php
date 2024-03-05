@@ -23,7 +23,7 @@ use Spatie\FlareClient\Api;
     
 //});
 Route::post('login', [LoginController::class, 'login']);
-Route::post('/register', [LoginController::class, 'store']);
+Route::post('/register', [UserController::class, 'store']);
 
 
 
