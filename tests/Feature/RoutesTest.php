@@ -5,9 +5,13 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 
 class RoutesTest extends TestCase
 {
+    use DatabaseTransactions;
+    
     public function testPlayerRoleTryingToBeAdmin(){
         $response = $this->post('api/login',[
             "email"=>"gkuphal@example.com",
