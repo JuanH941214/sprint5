@@ -52,7 +52,6 @@ class UserController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
-
         if ($user) {
             Auth::login($user);
             $user->assignRole('player'); 
