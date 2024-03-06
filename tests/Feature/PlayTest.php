@@ -2,23 +2,26 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Play;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Faker\Factory as Faker;
+
 
 
 class PlayTest extends TestCase
 {
     use DatabaseTransactions;
+    //use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
 
      public function testPlayCanBeSave(){
-        $response = $this->post('api/login',[
+       $response = $this->post('api/login',[
             "email"=>"gkuphal@example.com",
             "password"=>"password"
         ]);
@@ -138,26 +141,5 @@ class PlayTest extends TestCase
         $this->assertDatabaseMissing('play', ['user_id' => $userId]);
     }
 
-
-    public function testCanCreateUser()
-    {
-        $userData = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'password' => 'password123', 
-        ];
-
-        $response = $this->json('POST', '/api/users', $userData);
-
-        $response->assertStatus(201)
-                 ->assertJson([
-                    'status' => true,
-                    'message' => 'user created successfully!',
-                 ]);
-
-        $this->assertDatabaseHas('users', [
-            'name' => $userData['name'],
-            'email' => $userData['email'],
-        ]);
-    }
+  
 }

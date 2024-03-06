@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Play;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
-
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertSame;
 
 class AdminTest extends TestCase
 {
+    use DatabaseTransactions;
    //
     /**
      * A basic feature test example.
@@ -117,7 +118,7 @@ class AdminTest extends TestCase
 
     }
 
-    public function testLowesttWinRate(): void
+    public function testLowestWinRate(): void
     { 
         $response = $this->post('/api/login',[
             "email"=>"joancl@gmail.com",

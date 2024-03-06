@@ -4,11 +4,17 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 
 
 class UserTest extends TestCase
 {
+    use DatabaseTransactions;
     use WithFaker;
+  
+
     /**
      * A basic feature test example.
      */
@@ -30,6 +36,7 @@ class UserTest extends TestCase
 
     public function testCanLogOut(): void
     {
+        
         $response = $this->post('api/login',[
             "email"=>"joancl@gmail.com",
             "password"=>"password"

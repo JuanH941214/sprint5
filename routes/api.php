@@ -32,7 +32,7 @@ Route::middleware('auth:api')->group(function(){
     Route::group(['middleware' => ['role:admin']], function(){
         Route::get('/players',[UserController::class, 'index']);
         Route::get('/players/ranking',[UserController::class, 'showRanking']);
-        Route::get('/players/ranking/loser',[UserController::class, 'lowestWinRate']);
+        Route::get('/players/ranking/lowest',[UserController::class, 'lowestWinRate']);
         Route::get('/players/ranking/winner',[UserController::class, 'highestWinRate']);
 
 
